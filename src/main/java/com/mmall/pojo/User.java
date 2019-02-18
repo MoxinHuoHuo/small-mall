@@ -36,9 +36,7 @@ public class User {
         this.updateTime = updateTime;
     }
 
-    public User() {
-        super();
-    }
+    public User() { super(); }
 
     public Integer getId() {
         return id;

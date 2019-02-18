@@ -1,5 +1,7 @@
 package com.mmall.common;
 
+import com.mmall.dao.CartMapper;
+import com.mmall.pojo.Cart;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
@@ -9,6 +11,7 @@ public class ServerResponse<T> {
     T data;
     String msg;
     int status;
+
 
     private ServerResponse(T data, String msg, int status) {
         this.data = data;
