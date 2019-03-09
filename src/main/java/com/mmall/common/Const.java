@@ -22,6 +22,10 @@ public class Const {
         int ROLE_ADMIN = 1;//管理员
     }
 
+    public interface RedisCacheExtime{
+        int REDIS_SESSION_EXTIME = 60 * 30;//30分钟
+    }
+
     public enum ProductStatusEnum{
         ON_SALE(1,"在线");
 
