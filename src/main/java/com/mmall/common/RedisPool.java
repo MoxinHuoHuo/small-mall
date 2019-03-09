@@ -41,6 +41,8 @@ public class RedisPool {
 
         pool = new JedisPool(jedisPoolConfig,redisIp,redisPort,redisTimeOut,redisPassword);
 
+
+
     }
 
     static {

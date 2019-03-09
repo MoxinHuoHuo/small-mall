@@ -14,11 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class CookieUtil {
 
-    private final static String COOKIE_DOMAIN = ".happymmall.com";
+    private final static String COOKIE_DOMAIN = "4399.com";
     private final static String COOKIE_NAME="mmall_login_token";
 
     public static void writeLoginToken(HttpServletResponse response, String token){
         Cookie ck = new Cookie(COOKIE_NAME, token);
+
+        //domain的作用：只会在浏览器请求的url对应的域名中，设置cookie
+        // 例：www.4399.com/user/login.do 浏览器请求该url，dimain设置成4399.com，则只会在4399.com该二级域名或以下设置cookie
         ck.setDomain(COOKIE_DOMAIN);
         ck.setPath("/");
 
@@ -27,6 +30,11 @@ public class CookieUtil {
         response.addCookie(ck);
     }
 
+    /**
+     * 读取浏览器传过来的cookie，判断cookie是否属于本服务器，是则返回cookie中存储的value值，否则返回null
+     * @param request
+     * @return
+     */
     public static String readLoginToken(HttpServletRequest request){
         Cookie[] cks = request.getCookies();
         if(cks != null){
@@ -41,6 +49,11 @@ public class CookieUtil {
         return null;
     }
 
+    /**
+     * 创建一个cookie，加入response中返回给前端
+     * @param request
+     * @param response
+     */
     public static void delLoginToken(HttpServletRequest request, HttpServletResponse response){
         Cookie[] cks = request.getCookies();
         if (cks != null){
