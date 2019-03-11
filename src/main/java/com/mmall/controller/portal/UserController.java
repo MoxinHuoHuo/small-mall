@@ -86,6 +86,11 @@ public class UserController {
         return iUserService.checkValid(str,type);
     }
 
+    /**
+     * 获取登录用户信息
+     * @param httpServletRequest
+     * @return
+     */
     @RequestMapping(value = "get_user_info.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpServletRequest httpServletRequest){
@@ -102,6 +107,7 @@ public class UserController {
         }
         return ServerResponse.createByERROR("用户未登录,无法获取当前用户的信息");
     }
+
 
     /**
      * 获取用户对用的密保问题
