@@ -53,13 +53,16 @@ public class UserController {
 
     /**
      * 用户退出
-     * @param session
+     * @param response
+     * @param request
      * @return
      */
     @RequestMapping(value = "logout.do",method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<String> logout(HttpSession session){
-        session.removeAttribute(Const.CURRENT_USER);
+    public ServerResponse<String> logout(HttpServletResponse response, HttpServletRequest request){
+        String loginToken = CookieUtil.readLoginToken(request);
+        CookieUtil.delLoginToken(request, response);
+        RedisPoolUtil.del(loginToken);
         return ServerResponse.createBySuccess();
     }
 
