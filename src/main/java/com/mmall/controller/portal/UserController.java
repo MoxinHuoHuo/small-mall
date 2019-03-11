@@ -8,6 +8,7 @@ import com.mmall.service.IUserService;
 import com.mmall.util.CookieUtil;
 import com.mmall.util.JsonUtil;
 import com.mmall.util.RedisPoolUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +45,7 @@ public class UserController {
         if (response.isSuccess()){
             // session.setAttribute(Const.CURRENT_USER,response.getData());
             CookieUtil.writeLoginToken(httpServletResponse,session.getId());
-            CookieUtil.readLoginToken(request);
+            //CookieUtil.readLoginToken(request);
             RedisPoolUtil.setEx(session.getId(), Const.RedisCacheExtime.REDIS_SESSION_EXTIME, JsonUtil.obj2String(response.getData()));
         }
         return response;
@@ -83,6 +84,23 @@ public class UserController {
     @ResponseBody
     public ServerResponse<String> checkValid(String str,String type){
         return iUserService.checkValid(str,type);
+    }
+
+    @RequestMapping(value = "get_user_info.do",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<User> getUserInfo(HttpServletRequest httpServletRequest){
+
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        if(StringUtils.isEmpty(loginToken)){
+            return ServerResponse.createByERROR("用户未登录,无法获取当前用户的信息");
+        }
+        String userJsonStr = RedisPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJsonStr,User.class);
+
+        if(user != null){
+            return ServerResponse.createBySuccess(user);
+        }
+        return ServerResponse.createByERROR("用户未登录,无法获取当前用户的信息");
     }
 
     /**
