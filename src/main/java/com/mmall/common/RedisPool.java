@@ -41,7 +41,7 @@ public class RedisPool {
 
         pool = new JedisPool(jedisPoolConfig,redisIp,redisPort,redisTimeOut,redisPassword);
 
-
+        System.out.println("---------------连接池配置结束-----------");
 
     }
 
