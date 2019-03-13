@@ -50,7 +50,7 @@ public class CookieUtil {
     }
 
     /**
-     * 创建一个cookie，加入response中返回给前端
+     * 删除一个cookie，加入response中返回给前端
      * @param request
      * @param response
      */
