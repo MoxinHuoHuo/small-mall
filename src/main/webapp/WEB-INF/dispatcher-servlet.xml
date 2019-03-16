@@ -32,24 +32,24 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!-- 配置拦截器 -->
+    <!-- 配置拦截器
     <mvc:interceptors>
         <mvc:interceptor>
-            <!-- 拦截所有.do请求控制器.
+            &lt;!&ndash; 拦截所有.do请求控制器.
                  path属性所代表的意思：
                  1. /** 拦截所有的请求
                  从项目名开始算(不包括项目名)，每一个*代表一级目录，最后一个*表示任意请求
                  2. /*   拦截url：www.4399.com/logout.do
                  3. /*/* 拦截url: www.4399.com/user/logout.do 或 www.4399.com/user/logout
                  4. /*/*.do 拦截url：www.4399.com/user/logout.do
-                 -->
+                 &ndash;&gt;
             <mvc:mapping path="/*/*.do"/>
-            <!-- mvc:exclude-mapping是另外一种拦截，它可以在你后来的测试中对某个页面进行不拦截，这样就不用在
-                LoginInterceptor的preHandler方法里面获取不拦截的请求uri地址了(优选) -->
-            <!--<mvc:exclude-mapping path="/system/login" />-->
+            &lt;!&ndash; mvc:exclude-mapping是另外一种拦截，它可以在你后来的测试中对某个页面进行不拦截，这样就不用在
+                LoginInterceptor的preHandler方法里面获取不拦截的请求uri地址了(优选) &ndash;&gt;
+            &lt;!&ndash;<mvc:exclude-mapping path="/system/login" />&ndash;&gt;
             <bean class="com.mmall.Interceptor.SessionExpireInterceptor"></bean>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
 
 
 

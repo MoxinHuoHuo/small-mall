@@ -4,7 +4,7 @@ import com.mmall.common.Const;
 import com.mmall.pojo.User;
 import com.mmall.util.CookieUtil;
 import com.mmall.util.JsonUtil;
-import com.mmall.util.RedisPoolUtil;
+import com.mmall.util.RedisShardedPoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,10 +29,10 @@ public class SessionExpireInterceptor implements HandlerInterceptor{
 
         if (StringUtils.isNotEmpty(loginToken)) {
 
-            String userString = RedisPoolUtil.get(loginToken);
+            String userString = RedisShardedPoolUtil.get(loginToken);
             User user = JsonUtil.string2Obj(userString, User.class);
             if (user != null){
-                RedisPoolUtil.expire(loginToken, Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+                RedisShardedPoolUtil.expire(loginToken, Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
             }
         }
 
