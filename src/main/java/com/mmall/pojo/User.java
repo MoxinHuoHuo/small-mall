@@ -2,10 +2,11 @@ package com.mmall.pojo;
 
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @ToString
-public class User {
+public class User implements Serializable {
     private Integer id;
 
     private String username;

@@ -9,13 +9,17 @@
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package="com.mmall" annotation-config="true"/>
+    <!--spring.xml文件只指定扫描除了@Controller注解之外的所有注解-->
+    <context:component-scan base-package="com.mmall" annotation-config="true">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <!--<context:annotation-config/>-->
     <aop:aspectj-autoproxy/>
 
     <!--引入关于mybatis的数据库的配置-->
     <import resource="applicationContext-datasource.xml"/>
+    <import resource="spring-session.xml"/>
 
 
 </beans>
