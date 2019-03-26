@@ -36,9 +36,10 @@ public class UserSpringSessionController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/login.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/login.do",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<User> login(String userName, String password, HttpSession session){
+
         ServerResponse<User> response=iUserService.login(userName,password);
 
         if (response.isSuccess()){

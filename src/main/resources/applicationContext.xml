@@ -3,11 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="
-     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
     <!--spring.xml文件只指定扫描除了@Controller注解之外的所有注解-->
     <context:component-scan base-package="com.mmall" annotation-config="true">
@@ -17,9 +17,17 @@
     <!--<context:annotation-config/>-->
     <aop:aspectj-autoproxy/>
 
+    <!-- 二期新增spring schedule的时候新增的 -->
+    <!-- 将datasource.properties配置文件的值读取出来，直接显示 -->
+    <context:property-placeholder location="classpath:datasource.properties"/>
+    <!-- 开启spring schedule必要配置 -->
+    <task:annotation-driven/>
+
+
+
     <!--引入关于mybatis的数据库的配置-->
     <import resource="applicationContext-datasource.xml"/>
-    <import resource="spring-session.xml"/>
+    <!--<import resource="spring-session.xml"/>-->
 
 
 </beans>
