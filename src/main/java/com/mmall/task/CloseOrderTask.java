@@ -20,7 +20,7 @@ public class CloseOrderTask {
     @Autowired
     IOrderService iOrderService;
 
-    @Scheduled(cron = "0 */1 * * * ?")
+    //@Scheduled(cron = "0 */1 * * * ?")
     public void closeOrderTaskV1() {
         log.info("关闭订单定时任务-------start");
         int hour = Integer.parseInt(PropertiesUtil.getProperty("close.order.task.time"),2);
@@ -48,7 +48,7 @@ public class CloseOrderTask {
         log.info("获取{},ThreadName:{}",Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK,Thread.currentThread().getName());
 
         int hour = Integer.parseInt(PropertiesUtil.getProperty("close.order.task.time.hour","2"));
-        iOrderService.closeOrder(hour);
+        // iOrderService.closeOrder(hour);
 
         //释放锁
         RedisShardedPoolUtil.del(lockName);
