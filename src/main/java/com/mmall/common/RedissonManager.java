@@ -17,14 +17,16 @@ import javax.annotation.PostConstruct;
 @Slf4j
 public class RedissonManager {
 
-        //在redis环境没有搭建起来之前，这里先注释上，否则项目启动不起来。
+    //在redis环境没有搭建起来之前，这里先注释上，否则项目启动不起来。
 
-        private Config config = new Config();
+    private Config config = new Config();
 
         private Redisson redisson = null;
 
         private static final String redis1Ip = PropertiesUtil.getProperty("redis1.ip");
+        private static String  redisPassword1 = PropertiesUtil.getProperty("redis1.password");
         private static final Integer redis1Port = Integer.parseInt(PropertiesUtil.getProperty("redis1.port"));
+    private static Integer redisTimeOut = Integer.parseInt(PropertiesUtil.getProperty("redis.timeout"));
 
 
 
@@ -37,7 +39,8 @@ public class RedissonManager {
                 //在redis环境没有搭建起来之前，这里先注释上，否则项目启动不起来。
 
                 //127.0.0.1:6379
-            config.useSingleServer().setAddress(new StringBuilder().append(redis1Ip).append(":").append(redis1Port).toString());
+            config.useSingleServer().setAddress(new StringBuilder().append(redis1Ip).append(":").append(redis1Port).toString())
+                    .setPassword(redisPassword1).setTimeout(redisTimeOut);
 
 
                 //单主模式

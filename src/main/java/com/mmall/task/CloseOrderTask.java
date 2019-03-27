@@ -97,14 +97,15 @@ public class CloseOrderTask {
 
         if (res) {
             try {
-                log.info("获取到Lock！");
+                log.info("====获取到Lock！=======");
+                log.info("正在执行业务...");
 
             }finally {
-                log.info("释放Lock！");
+                log.info("=======释放Lock！=======");
                 lock.unlock();
             }
         }else {
-            log.info("没有获取到Lock！");
+            log.info("~~~~没有获取到Lock！~~~~~~~~");
         }
     }
 
